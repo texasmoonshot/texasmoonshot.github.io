@@ -1,0 +1,136 @@
+body, html {
+    overflow-x: hidden;
+  }
+  
+.projects_title {
+    text-align: center;
+    font-size: 3rem;
+    color: white;
+    background-color: black;
+    font-weight: 300;
+    padding: 40px 60px 20px;
+    padding-top: 3rem;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .video-scroll-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    background-color: black;
+    padding: 80px 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .video-scroll-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+  
+  .video-scroll-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    background-color: black;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    padding-top: 0%;
+    padding-bottom: 13rem;
+    overscroll-behavior-x: contain;
+  }
+  
+  .video-scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .video-strip {
+    display: flex;
+    gap: 60px;
+    min-width: 100%;
+    width: max-content;
+    white-space: nowrap;
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+  }  
+  
+  .video-wrapper {
+    flex: 0 0 auto;
+    width: 840px;
+    height: 560px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    pointer-events: none;
+  }
+  
+  .video-wrapper a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+    position: relative;
+  }
+  
+  /* Removed fade overlay */
+  .video-overlay {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .projects_title {
+      font-size: 2rem;
+      padding: 2rem 1.5rem 1rem;
+    }
+  
+    .video-scroll-container {
+      padding-top: 1rem;
+      padding-bottom: 8rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      touch-action: pan-x;
+      -webkit-transform: translateZ(0);
+      overscroll-behavior-x: contain;
+    }
+  
+    .video-strip {
+      gap: 30px;
+      white-space: nowrap;
+    }
+  
+    .video-wrapper {
+      width: 90vw;
+      height: calc(90vw * 0.75);
+    }
+  }
+  
+  
+  .video-scroll-container.video-stack {
+    display: block;
+    padding: 3rem 1rem 8rem;
+    overflow: hidden;
+  }
+  
+  .video-scroll-container.video-stack .video-wrapper {
+    width: 100%;
+    max-width: 840px;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    margin: 0 auto 4rem;
+    position: relative;
+  }
+  
+  .video-scroll-container.video-stack .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  

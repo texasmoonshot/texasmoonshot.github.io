@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link href="css/navbar.css" rel="stylesheet" type="text/css">
+  <link href="css/video_scroller.css" rel="stylesheet" type="text/css">
+  <title>Projects — Texas Moonshot</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="menu-backdrop" id="menu-backdrop"></div>
+    <header class="header">
+      <nav class="navbar negative">
+        <a class="menuHome site-title" href="index.html">
+            Texas<span class="mobile-break"><br></span> Moonshot
+          </a>    
+        <div class="menu-toggle" id="menu-toggle">
+          <span class="menu-icon">&#9776;</span>
+          <span class="close-icon" id="close-icon">╳</span>
+        </div>
+    
+        <div class="nav-links" id="nav-links">
+          <a class="menuOther" href="index.html">Home</a>
+          <a class="menuOther" href="about.html">About</a>
+          <a class="menuOther" href="projects.html">Projects</a>
+          <a class="menuOther" href="contact.html">Contact</a>
+        </div>
+      </nav>
+    </header>
+    
+    <div class="projects_title">Film</div>
+    <div class="video-scroll-container video-stack">
+
+  <!-- Vimeo: Bob Wills -->
+  <div class="video-wrapper">
+      <a href="https://vimeo.com/785100762" target="_blank">
+          <iframe
+          src="https://player.vimeo.com/video/785100762?autoplay=1&muted=1&loop=1&background=1#t=5s"
+          title="Bob Wills"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen></iframe>
+      </a>
+  </div>
+
+  <!-- YouTube: High Flyer -->
+  <div class="video-wrapper">
+      <a href="https://www.youtube.com/watch?v=eMGxMxSU3rs" target="_blank">
+      <iframe
+          src="https://www.youtube.com/embed/eMGxMxSU3rs?autoplay=1&mute=1&loop=1&playlist=eMGxMxSU3rs&controls=0&modestbranding=1&rel=0&start=5"
+          title="High Flyer"
+          allow="autoplay; encrypted-media"
+          allowfullscreen></iframe>
+      </a>
+  </div>
+  
+        <!-- Vimeo: Wolf of the Year -->
+        <div class="video-wrapper">
+            <a href="https://vimeo.com/927702436" target="_blank">
+                <iframe
+                src="https://player.vimeo.com/video/927702436?autoplay=1&muted=1&loop=1&background=1#t=5s"
+                title="Wolf of the Year"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen></iframe>
+            </a>
+        </div>
+                
+        <!-- YouTube: Wendell -->
+        <div class="video-wrapper">
+            <a href="https://www.youtube.com/watch?v=Cdq9g94WTQQ" target="_blank">
+                <iframe
+                src="https://www.youtube.com/embed/Cdq9g94WTQQ?autoplay=1&mute=1&loop=1&playlist=Cdq9g94WTQQ&controls=0&modestbranding=1&rel=0&start=5"
+                title="Wendell"
+                allow="autoplay; encrypted-media"
+                allowfullscreen></iframe>
+            </a>
+        </div>
+        
+        <!-- YouTube: Pilot -->
+        <div class="video-wrapper">
+          <a href="https://www.youtube.com/watch?v=o0BMMo--JU0" target="_blank">
+            <iframe
+              src="https://www.youtube.com/embed/o0BMMo--JU0?autoplay=1&mute=1&loop=1&playlist=o0BMMo--JU0&controls=0&modestbranding=1&rel=0&start=5"
+              title="Pilot Teaser"
+              allow="autoplay; encrypted-media"
+              allowfullscreen></iframe>
+          </a>
+        </div>
+          
+  </div>
+  
+  <footer class="site-footer">
+    <div class="footer-title">Art. Film.</div>
+    <div class="footer-bottom">© 2025 Texas Moonshot</div>
+  </footer>
+  
+  <script>
+    const container = document.querySelector('.video-scroll-container');
+    let direction = 1;
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+    let speed = isMobile ? 24 : 12; // Mobile scrolls faster
+    let paused = false;
+    let resumeTimeout;
+    let scrollInterval = null;
+  
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  
+    function autoScrollRAF() {
+      if (!container || paused || isTouchDevice) return;
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      container.scrollLeft += direction * speed;
+  
+      if (container.scrollLeft >= maxScroll) direction = -1;
+      if (container.scrollLeft <= 0) direction = 1;
+  
+      requestAnimationFrame(autoScrollRAF);
+    }
+  
+    function startTouchScrollInterval() {
+      if (!isTouchDevice || scrollInterval) return;
+      scrollInterval = setInterval(() => {
+        if (paused) return;
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        container.scrollLeft += direction * speed;
+  
+        if (container.scrollLeft >= maxScroll) direction = -1;
+        if (container.scrollLeft <= 0) direction = 1;
+      }, 40); // ~25fps
+    }
+  
+    function stopTouchScrollInterval() {
+      clearInterval(scrollInterval);
+      scrollInterval = null;
+    }
+  
+    container.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+        paused = true;
+        if (isTouchDevice) stopTouchScrollInterval();
+        clearTimeout(resumeTimeout);
+        resumeTimeout = setTimeout(() => {
+          paused = false;
+          if (isTouchDevice) startTouchScrollInterval();
+        }, 1500);
+      }
+    });
+  
+    container.addEventListener('pointerdown', () => {
+      paused = true;
+      if (isTouchDevice) stopTouchScrollInterval();
+      clearTimeout(resumeTimeout);
+    });
+  
+    container.addEventListener('pointerup', () => {
+      resumeTimeout = setTimeout(() => {
+        paused = false;
+        if (isTouchDevice) startTouchScrollInterval();
+      }, 1500);
+    });
+  
+    setTimeout(() => {
+      if (isTouchDevice) {
+        startTouchScrollInterval();
+      } else {
+        requestAnimationFrame(autoScrollRAF);
+      }
+    }, 3000);
+  </script>
+  
+  
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const closeIcon = document.getElementById('close-icon');
+    const backdrop = document.getElementById('menu-backdrop');
+    const navbar = document.querySelector('.navbar');
+    const header = document.querySelector('.header');
+  
+    function openMenu() {
+      navLinks.classList.add('open');
+      backdrop.classList.add('open');
+      menuToggle.classList.add('open');
+      navbar.classList.add('menu-open');
+      header.classList.add('menu-open');
+    }
+  
+    function closeMenu() {
+      navLinks.classList.remove('open');
+      backdrop.classList.remove('open');
+      menuToggle.classList.remove('open');
+      navbar.classList.remove('menu-open');
+      header.classList.remove('menu-open');
+    }
+  
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.contains('open');
+      isOpen ? closeMenu() : openMenu();
+    });
+  
+    closeIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeMenu();
+    });
+  
+    backdrop.addEventListener('click', closeMenu);
+  </script>
+</body>
+</html>

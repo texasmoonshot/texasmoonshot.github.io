@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <link href="css/navbar.css" rel="stylesheet" type="text/css">
+  <title>Texas Moonshot </title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="menu-backdrop" id="menu-backdrop"></div>
+  <header class="header">
+    <nav class="navbar">
+      <a class="menuHome site-title" href="index.html">
+        Texas<span class="mobile-break"><br></span> Moonshot
+      </a>  
+      <div class="menu-toggle" id="menu-toggle">
+        <span class="menu-icon">&#9776;</span>
+        <span class="close-icon" id="close-icon">╳</span>
+      </div>
+  
+      <div class="nav-links" id="nav-links">
+        <a class="menuOther" href="index.html">Home</a>
+        <a class="menuOther" href="about.html">About</a>
+        <a class="menuOther" href="projects.html">Projects</a>
+        <a class="menuOther" href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+  
+  <main>
+    <div class="main-chunk">
+      <h2>Select Works <a class="view-link" href="projects.html">View Work</a></h2>
+      <div class="main-grid">
+    
+        <a href="https://vimeo.com/927702436" class="work-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/67c7bf3a45c6ed5737cea328/740b268a-c726-4d4b-88ec-5513f0f34231/wolfoftheyear.jpg" alt="Wolf of the Year">
+          <p>Wolf of the Year</p>
+        </a>
+    
+        <a href="https://vimeo.com/923826886" class="work-item">
+          <img src="https://images.squarespace-cdn.com/content/v1/67c7bf3a45c6ed5737cea328/a4cdb764-5640-475b-b281-b0186a7a7670/highflyer.jpg" alt="High Flyer">
+          <p>High Flyer</p>
+        </a>
+    
+        <a href="https://vimeo.com/785100762" class="work-item">
+          <img src="images/bobwills_shot1.png" alt="Bob Wills">
+          <p>Bob Wills</p>
+        </a>
+    
+      </div>
+    </div>    
+    
+    <section class="content">
+      <div class="text-box">
+        <h2>WHAT WE DO</h2>
+        <p>
+          We’re Texas Moonshot — your small-business video team. We bring the gear, the craft, 
+          and the hustle to turn ideas into sharp, cinematic stories that move people to act.
+        </p>
+        <p>
+          Services include concept development, scripting, producing, directing, cinematography, 
+          editing, color, sound, and delivery for commercials, branded content, social campaigns, 
+          documentaries, events, and narrative pieces. Launch a single spot or a full campaign — 
+          let’s make something memorable.
+        </p>
+        
+        <a class="button" href="about.html">Learn More</a>
+      </div>
+      <div class="image-box"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-title">Art. Film.</div>
+    <div class="footer-bottom">© 2025 Texas Moonshot</div>
+  </footer>
+  
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const closeIcon = document.getElementById('close-icon');
+    const backdrop = document.getElementById('menu-backdrop');
+    const navbar = document.querySelector('.navbar');
+    const header = document.querySelector('.header');
+  
+    function openMenu() {
+      navLinks.classList.add('open');
+      backdrop.classList.add('open');
+      menuToggle.classList.add('open');
+      navbar.classList.add('menu-open');
+      header.classList.add('menu-open');
+    }
+  
+    function closeMenu() {
+      navLinks.classList.remove('open');
+      backdrop.classList.remove('open');
+      menuToggle.classList.remove('open');
+      navbar.classList.remove('menu-open');
+      header.classList.remove('menu-open');
+    }
+  
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.contains('open');
+      isOpen ? closeMenu() : openMenu();
+    });
+  
+    closeIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeMenu();
+    });
+  
+    backdrop.addEventListener('click', closeMenu);
+  </script>
+
+</body>
+</html>
